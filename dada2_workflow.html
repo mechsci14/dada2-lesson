@@ -191,6 +191,7 @@ $(document).ready(function () {
 </div>
 
 
+<p>Please note that I have very liberally borrowed from Ben Callahan’s dada2 tutorial in creating this lesson.</p>
 <div id="analyzing-microbiome-data" class="section level1">
 <h1>Analyzing Microbiome Data</h1>
 <p>Many of you are here today because you have an interest in the microbiome, that “new organ” comprising the trillions of microbes that live in and on us. Today we are going to talk about how to identify these organisms isolated from a sample by sequencing a portion of the genetic material present, lining these up into counts of organisms, then using these data to summarize the microbes present in numeric or graphical fashion.</p>
@@ -575,8 +576,9 @@ fileNames</code></pre>
 ## [46] &quot;silva_nr_v132_train_set.fa.gz&quot;      
 ## [47] &quot;silva_species_assignment_v132.fa&quot;   
 ## [48] &quot;silva_species_assignment_v132.fa.gz&quot;
-## [49] &quot;stability.batch&quot;                    
-## [50] &quot;stability.files&quot;</code></pre>
+## [49] &quot;SILVA_SSU_r132_March2018.RData&quot;     
+## [50] &quot;stability.batch&quot;                    
+## [51] &quot;stability.files&quot;</code></pre>
 <p>OK, I see 38 .fastq files and the two SILVA V132 files. With the exception of the two SILVA files (which we list but the <code>dada2</code> tutorial does not), we agree. The file named “filtered” will be created in another couple of steps, so we are not going to worry about that.</p>
 </div>
 <div id="filter-and-trim" class="section level3">
@@ -1016,8 +1018,9 @@ getwd()</code></pre>
 ## [46] &quot;silva_nr_v132_train_set.fa.gz&quot;      
 ## [47] &quot;silva_species_assignment_v132.fa&quot;   
 ## [48] &quot;silva_species_assignment_v132.fa.gz&quot;
-## [49] &quot;stability.batch&quot;                    
-## [50] &quot;stability.files&quot;</code></pre>
+## [49] &quot;SILVA_SSU_r132_March2018.RData&quot;     
+## [50] &quot;stability.batch&quot;                    
+## [51] &quot;stability.files&quot;</code></pre>
 <pre class="r"><code>taxa &lt;- assignTaxonomy(seqtab.nochim, &quot;~/Documents/NRSG_741/MiSeqData/MiSeq_SOP/silva_nr_v132_train_set.fa.gz&quot;, multithread = TRUE)
 unname(head(taxa))</code></pre>
 <pre><code>##      [,1]       [,2]            [,3]          [,4]           
@@ -1043,8 +1046,8 @@ unname(head(taxa))</code></pre>
 taxa &lt;- addSpecies(taxa, &quot;~/Documents/NRSG_741/MiSeqData/MiSeq_SOP/silva_species_assignment_v132.fa.gz&quot;)</code></pre>
 <p>Here is an alternative taxonomic classification method available via the <code>DECIPHER</code> package from Bioconductor. You will need to download a new classifier dataset from [<a href="http://www2.decipher.codes/Downloads.html" class="uri">http://www2.decipher.codes/Downloads.html</a>]{<a href="http://www2.decipher.codes/Downloads.html" class="uri">http://www2.decipher.codes/Downloads.html</a>}, using the SILVA SSU r132 (modified) link near the bottom of the page.</p>
 <pre class="r"><code>dna &lt;- DNAStringSet(getSequences(seqtab.nochim)) #Create a DNAStringSet from the ASVs
-newpath &lt;- &quot;~/Desktop/Silva/Silva.nr_v132&quot;
-load(file.path(newpath,&quot;SILVA_SSU_r132_March2018.RData&quot;)) #CHANGE TO WHERE YOU HAVE STORED THIS DATASET
+
+load(file.path(path,&quot;SILVA_SSU_r132_March2018.RData&quot;)) #CHANGE TO WHERE YOU HAVE STORED THIS DATASET
 ids &lt;- IdTaxa(dna, trainingSet, strand=&quot;top&quot;, processors = NULL, verbose = FALSE)
 ranks &lt;- c(&quot;domain&quot;, &quot;phylum&quot;, &quot;class&quot;, &quot;order&quot;, &quot;family&quot;, &quot;genus&quot;, &quot;species&quot;) # ranks of interest
 # Convert the output object of class &quot;Taxa&quot; to a matrix analogous to the output from assignTaxonomy
@@ -1101,17 +1104,17 @@ alignment &lt;- AlignSeqs(DNAStringSet(seqs), anchor=NA)</code></pre>
 <pre><code>## Determining distance matrix based on shared 8-mers:
 ## ===========================================================================
 ## 
-## Time difference of 0.47 secs
+## Time difference of 0.44 secs
 ## 
 ## Clustering into groups by similarity:
 ## ===========================================================================
 ## 
-## Time difference of 0.06 secs
+## Time difference of 0.07 secs
 ## 
 ## Aligning Sequences:
 ## ===========================================================================
 ## 
-## Time difference of 1.39 secs
+## Time difference of 1.33 secs
 ## 
 ## Iteration 1 of 2:
 ## 
@@ -1128,7 +1131,7 @@ alignment &lt;- AlignSeqs(DNAStringSet(seqs), anchor=NA)</code></pre>
 ## Realigning Sequences:
 ## ===========================================================================
 ## 
-## Time difference of 0.83 secs
+## Time difference of 0.79 secs
 ## 
 ## Iteration 2 of 2:
 ## 
@@ -1145,7 +1148,7 @@ alignment &lt;- AlignSeqs(DNAStringSet(seqs), anchor=NA)</code></pre>
 ## Realigning Sequences:
 ## ===========================================================================
 ## 
-## Time difference of 0.15 secs</code></pre>
+## Time difference of 0.14 secs</code></pre>
 <p>Now that the sequences are aligned we can use the <code>phanghorn</code> package to construct the tree.</p>
 <pre class="r"><code>library(phangorn)</code></pre>
 <pre><code>## Loading required package: ape</code></pre>

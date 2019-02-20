@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+Please note that I have very liberally borrowed from Ben Callahan's dada2 tutorial in creating this lesson.
 
 # Analyzing Microbiome Data
 
@@ -536,8 +536,8 @@ Here is an alternative taxonomic classification method available via the `DECIPH
 ```{r}
 
 dna <- DNAStringSet(getSequences(seqtab.nochim)) #Create a DNAStringSet from the ASVs
-newpath <- "~/Desktop/Silva/Silva.nr_v132"
-load(file.path(newpath,"SILVA_SSU_r132_March2018.RData")) #CHANGE TO WHERE YOU HAVE STORED THIS DATASET
+
+load(file.path(path,"SILVA_SSU_r132_March2018.RData")) #CHANGE TO WHERE YOU HAVE STORED THIS DATASET
 ids <- IdTaxa(dna, trainingSet, strand="top", processors = NULL, verbose = FALSE)
 ranks <- c("domain", "phylum", "class", "order", "family", "genus", "species") # ranks of interest
 # Convert the output object of class "Taxa" to a matrix analogous to the output from assignTaxonomy
