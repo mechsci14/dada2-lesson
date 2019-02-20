@@ -1,0 +1,43 @@
+---
+title: "Pre-dada2 homework"
+author: "Vicki Hertzberg"
+date: "2/20/2019"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Homework 3
+In our next session we are going to use `dada2` to process demultiplexed, trimmed fastq files into something that can be use in `phyloseq` as an OTU table and analyzed to examine the microbiome. In order to follow along with this in class we ask that you prepare for it. Your homework is to show, in an rmd file on your repo that you subsequently output to pdf to turn into the Canvas site, that you have done this advance work. This takes some time, most of it just to have the machine process, hence the need to get it done before class.
+
+Please document that you have installed the necessary packages and downloaded the appropriate files.
+
+1. Document that you have installed `dada2` and `phyloseq`, as well as `shortread`, `DECIPHER`, and `ggplot2`. For `dada2` and `phyloseq` use the installation guide at the dada2 site: (http://benjjneb.github.io/dada2/index.html)[http://benjjneb.github.io/dada2/index.html]. As usual, `ggplot2` is available from CRAN. `DECIPHER` is also available from BioConductor, from where you have installed `dada2` and `phyloseq`, at this link: (https://bioconductor.org/packages/release/bioc/html/DECIPHER.html)[https://bioconductor.org/packages/release/bioc/html/DECIPHER.html]
+
+- Sufficient documentation would consist of the following R commands (in an R chunk, of course), one line per required package:
+
+library(*package_name*); packageVersion("*package_name*");
+
+- Except for `ggplot2`, these packages are not available through CRAN; rather you will have to go through bioconductor. See the `dada2` installation instructions for guidance for `dada2` and `phyloseq`. Installation instructions for `DECIPHER` are available at the link given above for the package.  Note: you should already have `ggplot2`, but please document it as well.
+
+2. Please document that you have downloaded  THREE additional sets of files as follows:
+
+- the fastq files from the Mothur MiseqSOP walkthrough. Download the file from the `dada2` walkthrough page, the link marked "example data used in the Mother MiSeq SOP". Unzip this dataset and store it on your computer. 
+- the Silva 132 training set and the Silva 132 species assignment zip files from (https://zenodo.org/record/1172783#.XG13Ti2ZMo8)[https://zenodo.org/record/1172783#.XG13Ti2ZMo8]. Do NOT unzip these two files, but DO store them in the same directory as your miseq files.
+- the SILVA SSU r132 RData object from this link: (http://www2.decipher.codes/Downloads.html)[http://www2.decipher.codes/Downloads.html]. Store this object in the same directory as your miseq files.
+
+
+- You can provide evidence that you have downloaded these files with the following commands (in an R chunk):
+
+path <- "~/MiSeq_SOP" # CHANGE THIS to the directory containing the fastq files after unzipping
+
+fns <- list.files(path)
+
+fns
+
+Due on 2/27 at 5 pm.
+
