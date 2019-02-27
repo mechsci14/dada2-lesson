@@ -555,7 +555,7 @@ If you want to use these new taxonomic assignments, set taxa <- taxid. Let's go 
 
 ```{r}
 
-taxa <- taxid #Don't do this if you want to use the original taxonomic assignments from the naive Bayes classifier employed by the dada2 assignTaxonomy and assignSpecies functions
+#taxa <- taxid #Don't do this if you want to use the original taxonomic assignments from the naive Bayes classifier employed by the dada2 assignTaxonomy and assignSpecies functions
 
 ```
 
@@ -786,7 +786,9 @@ Let's pick out the top 20 OTUs, then see how they fall in individuals, colored b
 top20 <- names(sort(taxa_sums(ps), decreasing=TRUE))[1:20]
 ps.top20 <- transform_sample_counts(ps, function(OTU) OTU/sum(OTU))
 ps.top20 <- prune_taxa(top20, ps.top20)
-plot_bar(ps.top20, x="Day", fill="family") + facet_wrap(~When, scales="free_x")
+p <- plot_bar(ps.top20, x="Day", fill="Family") + facet_wrap(~When, scales="free_x")
+p
+ggsave("~/Documents/NRSG_741/MiSeqData/ps barplot based on DECIPHER.png", plot = p, width = 6, height = 8, unit = "in")
 ```
 
 That wraps it up for today. Next week we will show more `phyloseq` and then get into functional predictions.
