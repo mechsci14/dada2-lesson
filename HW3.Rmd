@@ -1,0 +1,39 @@
+---
+title: "Homework3"
+author: "Madelyn Houser"
+date: "February 27, 2019"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Package Installation
+
+Install packages `dada2`, `phyloseq`, `DECIPHER`, `ShortRead`, and `ggplot2`. Then verify their installation by confirming the package version.
+
+```{r packages}
+library(phyloseq)
+packageVersion("phyloseq")
+library(DECIPHER)
+packageVersion("DECIPHER")
+library(ShortRead)
+packageVersion("ShortRead")
+library(dada2)
+packageVersion("dada2")
+library(ggplot2)
+packageVersion("ggplot2")
+```
+
+## File Acquisition
+
+Download and unzip the fastq files from the Mothur MiSeq SOP. Save the Silva 132 training set and Silva 132 species assignment zip files and Silva SSU r132 RData object in the same folder.
+
+```{r files}
+fns <- list.files("C:/Users/Acer/Documents/MadelynClasses/DataAnalytics/dada2_lesson/MiSeqSOPData/MiSeq_SOP")
+
+fns
+```
